@@ -87,20 +87,6 @@ async def sync(ctx):
     await ctx.send("✅ Done")
 
 @bot.command()
-async def link(ctx, *, username):
-    links[str(ctx.author.id)] = username
-    save_links(links)
-    await ctx.send(f"✅ Linked to {username}")
-    await update_once()
-
-@bot.command()
-async def sync(ctx):
-    await ctx.send("🔄 Syncing ranks...")
-    await update_once()
-    await ctx.send("✅ Done")
-
-# 👇 ADD IT HERE
-@bot.command()
 async def check(ctx, *, username):
     members = get_group_members()
 
@@ -129,7 +115,7 @@ async def on_message(message):
     await bot.process_commands(message)
 
 # =========================
-# CORE UPDATE FUNCTION (FIXED)
+# CORE UPDATE FUNCTION
 # =========================
 
 async def update_once():
@@ -178,9 +164,10 @@ async def update_once():
                 current_rank = r.name
                 break
 
+        # ✅ FIXED INDENTATION HERE
         if current_rank == role_name:
-    print(f"{rsn}: already correct ({role_name})")
-    continue
+            print(f"{rsn}: already correct ({role_name})")
+            continue
 
         if current_rank:
             old_role = discord.utils.get(guild.roles, name=current_rank)
