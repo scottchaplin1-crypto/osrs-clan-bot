@@ -86,6 +86,41 @@ async def sync(ctx):
     await update_once()
     await ctx.send("✅ Done")
 
+@bot.command()
+async def link(ctx, *, username):
+    links[str(ctx.author.id)] = username
+    save_links(links)
+    await ctx.send(f"✅ Linked to {username}")
+    await update_once()
+
+@bot.command()
+async def sync(ctx):
+    await ctx.send("🔄 Syncing ranks...")
+    await update_once()
+    await ctx.send("✅ Done")
+
+# 👇 ADD IT HERE
+@bot.command()
+async def check(ctx, *, username):
+    members = get_group_members()
+
+    wom_members = {
+        m["player"]["username"].lower(): m
+        for m in members
+        if m.get("player")
+    }
+
+    wom_member = wom_members.get(username.lower())
+
+    if not wom_member:
+        await ctx.send("❌ Player not found in WOM")
+        return
+
+    role_key = wom_member.get("role")
+    role_name = RANK_MAP.get(role_key.lower())
+
+    await ctx.send(f"📊 {username} should be: {role_name}")
+
 @bot.event
 async def on_message(message):
     if message.author.bot:
@@ -144,7 +179,8 @@ async def update_once():
                 break
 
         if current_rank == role_name:
-            continue
+    print(f"{rsn}: already correct ({role_name})")
+    continue
 
         if current_rank:
             old_role = discord.utils.get(guild.roles, name=current_rank)
