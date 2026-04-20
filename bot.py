@@ -86,9 +86,7 @@ async def link(ctx, *, username):
 @bot.command()
 async def sync(ctx):
     await ctx.send("🔄 Forcing rank sync...")
-
     await update_once()
-
     await ctx.send("✅ Sync complete")
 
 @bot.event
@@ -164,11 +162,14 @@ async def on_ready():
 async def update_loop():
     await bot.wait_until_ready()
 
-    guild = bot.get_guild(GUILD_ID)
 
     while True:
         try:
+            guild = bot.get_guild(GUILD_ID)
             members = get_group_members()
+            if not members:
+    await asyncio.sleep(60)
+    continue
 
             wom_members = {}
 
@@ -181,6 +182,8 @@ async def update_loop():
 
             for user_id, rsn in links.items():
                 member = guild.get_member(int(user_id))
+if member is None:
+    continue
                 if not member:
                     continue
 
