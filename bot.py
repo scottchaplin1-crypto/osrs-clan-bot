@@ -12,18 +12,18 @@ GROUP_ID = 13766
 LINKS_FILE = "links.json"
 
 RANK_MAP = {
-    "jade": "Jade",
-    "topaz": "Red Topaz",
-    "sapphire": "Sapphire",
-    "emerald": "Emerald",
-    "ruby": "Ruby",
-    "diamond": "Diamond",
-    "dragonstone": "Dragonstone",
-    "onyx": "Onyx",
-    "zenyte": "Zenyte",
-    "hellcat": "Hellcat",
-    "destroyer": "Destroyer",
-    "beast": "Beast"
+    "Jade": "Jade",
+    "Topaz": "Red Topaz",
+    "Sapphire": "Sapphire",
+    "Emerald": "Emerald",
+    "Ruby": "Ruby",
+    "Diamond": "Diamond",
+    "Dragonstone": "Dragonstone",
+    "Onyx": "Onyx",
+    "Zenyte": "Zenyte",
+    "Hellcat": "Hellcat",
+    "Destroyer": "Destroyer",
+    "Beast": "Beast"
 }
 
 # =========================
