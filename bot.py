@@ -87,7 +87,7 @@ async def link(ctx, *, username):
 async def sync(ctx):
     await ctx.send("🔄 Forcing rank sync...")
 
-    await update_loop_once()
+    await update_once()
 
     await ctx.send("✅ Sync complete")
 
@@ -103,10 +103,10 @@ async def on_message(message):
 # STARTUP
 # =========================
 
-async def update_loop_once():
+async def update_once():
     guild = bot.get_guild(GUILD_ID)
 
-    members = get_group_members()
+    await update_once()
 
     wom_members = {
         m["player"]["username"].lower(): m
